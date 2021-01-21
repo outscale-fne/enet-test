@@ -79,7 +79,26 @@ int client_draw(struct client *client)
             }
         }
     }
-    draw_circle(client->sdl.renderer, 100, 100, 50);
+    struct vector radar_center = vector_new(SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100);
+    draw_circle(client->sdl.renderer, radar_center.x, radar_center.y, 100);
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (client->players[i].empty == 0 && i != client->local_player_slot)
+        {
+            struct vector delta = vector_sub(client->players[i].transform.position, client->players[client->local_player_slot].transform.position);
+            double distance = vector_get_module(&delta);
+            double arg = vector_get_arg(&delta);
+            distance = distance / 10;
+            //if(distance < 100){
+            delta = vector_mul(delta, 1 / 10);
+            delta = vector_sum(delta, vector_new(SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100));
+            delta = vector_new(0,50);
+            delta = vector_set_arg(delta, arg);
+            draw_circle(client->sdl.renderer , delta.x+ radar_center.x,delta.y+ radar_center.y, 5);
+           // }
+
+        }
+    }
 
     return 1;
 }
