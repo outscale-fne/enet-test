@@ -428,7 +428,7 @@ int main(int argc, char **argv)
                             .draw = client_draw,
                             .exit = client_exit,
                             .draw_scoreboard = client_draw_scoreboard};
-    if (argc == 2)
+    if (argc == 2 || argc == 3)
     {
         strcpy(client.name, argv[1]);
     }
