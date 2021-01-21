@@ -10,6 +10,7 @@ server_c_files = src/server/server.c \
 				 $(shared_c_files) \
 
 client_c_files = src/client/client.c \
+				 src/client/utils.c \
 				 $(shared_c_files) \
 
 

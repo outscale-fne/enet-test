@@ -1,18 +1,4 @@
-#include <enet/enet.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-
-//Using SDL and standard IO
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <stdio.h>
-
-#include "../shared/player.h"
-#include "../shared/message.h"
-#include "../shared/shared.h"
 #include "client.h"
-#include "../shared/deltatime.h"
 
 struct client
 {
@@ -53,24 +39,6 @@ struct client
     /* Main loop triggering our callbacks. */
     int (*main_loop)(struct client *client);
 };
-void get_text_and_rect(SDL_Renderer *renderer, int x, int y, char *text,
-                       TTF_Font *font, SDL_Texture **texture, SDL_Rect *rect)
-{
-    int text_width;
-    int text_height;
-    SDL_Surface *surface;
-    SDL_Color textColor = {0, 255, 0, 0};
-
-    surface = TTF_RenderText_Blended_Wrapped(font, text, textColor, 500);
-    *texture = SDL_CreateTextureFromSurface(renderer, surface);
-    text_width = surface->w;
-    text_height = surface->h;
-    SDL_FreeSurface(surface);
-    rect->x = x;
-    rect->y = y;
-    rect->w = text_width;
-    rect->h = text_height;
-}
 int client_draw_scoreboard(struct client *client)
 {
     SDL_Rect rect1;
