@@ -34,5 +34,4 @@ void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
             }
         }
     }
-    SDL_RenderDrawPoint(renderer, x, y);
 }

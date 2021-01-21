@@ -81,6 +81,7 @@ int client_draw(struct client *client)
     }
     struct vector radar_center = vector_new(SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100);
     draw_circle(client->sdl.renderer, radar_center.x, radar_center.y, 100);
+    draw_circle(client->sdl.renderer, radar_center.x, radar_center.y, 3);
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         if (client->players[i].empty == 0 && i != client->local_player_slot)
@@ -209,7 +210,6 @@ int client_init(struct client *client)
             return -1;
         }
         client->sdl.font = TTF_OpenFont("WhiteRabbit-47pD.ttf", 24);
-        printf("client->sdl.font%d\n", client->sdl.font == NULL);
         SDL_SetWindowTitle(client->sdl.window, "Spaceship Warfare v0.1 by Fran6nd");
     }
     return 1;
