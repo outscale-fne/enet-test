@@ -7,9 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-
-//Using SDL and standard IO
 #include <stdio.h>
+#include "utils.h"
 
 #include "../shared/player.h"
 #include "../shared/message.h"
@@ -22,8 +21,5 @@ const int SCREEN_HEIGHT = 640;
 #define STATUS_PENDING 1
 #define STATUS_CONNECTED 2
 #define STATUS_DISCONNECTED 3
-
-void get_text_and_rect(SDL_Renderer *renderer, int x, int y, char *text,
-                       TTF_Font *font, SDL_Texture **texture, SDL_Rect *rect);
 
 #endif
