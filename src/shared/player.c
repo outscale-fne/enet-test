@@ -79,5 +79,5 @@ void player_set_inputs(struct player *player, struct inputs inputs)
         v.x += 1;
     }
     player->transform.angular_velocity = v.x * 100;
-    player->transform.velocity = vector_mul(vector_set_arg(vector_new(0, 1), player->transform.rotation), (v.y * 2 + 20) * 100 );
+    player->transform.velocity = vector_mul(vector_set_arg(vector_new(0, 1), player->transform.rotation), (v.y * 2 + 10) * 100 );
 }

@@ -207,7 +207,7 @@ int server_main_loop(struct server *server)
         {
 
             counter = 0;
-            for (int i = 0; i < MAX_PLAYERS; i++)
+            /*for (int i = 0; i < MAX_PLAYERS; i++)
             {
                 if (server->players[i].empty == 0)
                 {
@@ -215,7 +215,7 @@ int server_main_loop(struct server *server)
                     ENetPacket *packet = enet_packet_create(&pkt, sizeof(pkt), ENET_PACKET_FLAG_RELIABLE);
                     enet_host_broadcast(server->enet.host, 0, packet);
                 }
-            }
+            }*/
         }
     }
 
