@@ -19,7 +19,7 @@
 
 ## Installation:
 
-* `sudo apt install libsdl2-dev libenet-dev`
+* `sudo apt install libsdl2-dev libenet-dev libsdl2-ttf-dev`
 * `git clone https://github.com/Fran6nd/enet-test.git && cd enet-test && git submodule update --init`
 * `make all`
 
