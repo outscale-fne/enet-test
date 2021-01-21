@@ -129,6 +129,7 @@ int server_on_packet_receive(struct server *server, struct packet packet, ENetPe
     default:
         break;
     }
+    return 1;
 }
 
 int server_on_client_disconnection(struct server *server, int slot)
@@ -194,6 +195,8 @@ int server_main_loop(struct server *server)
                 server->inputs[event.peer->incomingPeerID].right = 0;
                 server->inputs[event.peer->incomingPeerID].tab = 0;
                 server->inputs[event.peer->incomingPeerID].space = 0;
+                break;
+            case ENET_EVENT_TYPE_NONE:
                 break;
             }
         }
