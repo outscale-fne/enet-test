@@ -202,13 +202,21 @@ int server_main_loop(struct server *server)
         }
         delta_time_update();
         counter = counter + delta_time();
-        if (counter > 1.0)
+        server->update(server, delta_time());
+        if (counter > 1.0 / 60)
         {
 
             counter = 0;
-            //printf("top\n");
+            for (int i = 0; i < MAX_PLAYERS; i++)
+            {
+                if (server->players[i].empty == 0)
+                {
+                    struct packet pkt = msg_new_player_state(&server->players[i], i);
+                    ENetPacket *packet = enet_packet_create(&pkt, sizeof(pkt), ENET_PACKET_FLAG_RELIABLE);
+                    enet_host_broadcast(server->enet.host, 0, packet);
+                }
+            }
         }
-        server->update(server, delta_time());
     }
 
     return 1;
