@@ -8,13 +8,15 @@
  * Each movement are calculated both client side and server side.
  * Each player can move and see others moving.
  * Working fine accross the worldwide web.
+ * Displaying a radar.
 
  ## What is missing:
 
  * Collision detection.
  * Shooting system.
- * Keeping the local player centered on screen.
  * Possibility to load custom spaceships via a json file i.e. (with validation from the server to avoid having too big vaissels).
+ * Displaying a map given by the server (probably based on time).
+ * Displaying in full screen and scaling game objects.
 
 
 ## Installation:
