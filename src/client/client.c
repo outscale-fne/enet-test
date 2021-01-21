@@ -79,6 +79,7 @@ int client_draw(struct client *client)
             }
         }
     }
+    draw_circle(client->sdl.renderer, 100, 100, 50);
 
     return 1;
 }
