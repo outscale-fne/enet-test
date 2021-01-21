@@ -63,7 +63,54 @@ int client_draw_scoreboard(struct client *client)
 }
 int client_draw(struct client *client)
 {
+    /* The following code is intended to display "stars" so the background is not completely empty. */
+    struct vector offset = vector_zero();
+    if (client->local_player_slot >= 0)
+    {
+        offset = vector_sub(vector_new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), client->players[client->local_player_slot].transform.position);
+    }
+    struct vector background[5] = {{.x = 100, .y = 200}, {.x = 300, .y = 700}, {.x = 700, .y = 650}, {.x = 495, .y = 25}, {.x = 175, .y = 650}};
+    SDL_SetRenderDrawColor(client->sdl.renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
+    for (int i = 0; i < 5; i++)
+    {
+        if (client->local_player_slot >= 0)
+        {
+            int diff;
+            do
+            {
+                diff = client->players[client->local_player_slot].transform.position.x - background[i].x;
+                if (abs((int)diff) > SCREEN_WIDTH / 2)
+                {
+                    if (diff > 0)
+                    {
+                        background[i].x += SCREEN_WIDTH;
+                    }
+                    else
+                    {
+                        background[i].x -= SCREEN_WIDTH;
+                    }
+                }
+            } while (abs((int)diff) > SCREEN_WIDTH / 2);
+            do
+            {
+                diff = client->players[client->local_player_slot].transform.position.y - background[i].y;
+                if (abs((int)diff) > SCREEN_HEIGHT / 2)
+                {
+                    if (diff > 0)
+                    {
+                        background[i].y += SCREEN_HEIGHT;
+                    }
+                    else
+                    {
+                        background[i].y -= SCREEN_HEIGHT;
+                    }
+                }
+            } while (abs((int)diff) > SCREEN_HEIGHT / 2);
+        }
 
+        draw_circle(client->sdl.renderer, background[i].x + offset.x, background[i].y + offset.y, 2);
+    }
+    /* Now let's draw players. An optimization would be to draw only visibles player. */
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         if (client->players[i].empty == 0)
@@ -71,7 +118,7 @@ int client_draw(struct client *client)
             player_update(&client->players[i], delta_time());
             if (client->local_player_slot >= 0)
             {
-                player_draw(&client->players[i], client->sdl.renderer, vector_sub(vector_new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), client->players[client->local_player_slot].transform.position));
+                player_draw(&client->players[i], client->sdl.renderer, offset);
             }
             else
             {
